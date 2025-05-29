@@ -62,47 +62,57 @@ void deleteCharacter(char name[]) {
 
 }
 
-void swap(int i, int j) {
-    data temp = characters[i];
-    characters[i] = characters[j];
-    characters[j] = temp;
-}
-
-int partition(int low, int high) {
-    data *pivot = &characters[low];
-    int i = low;
-    int j = high;
-
-    while (i < j) 
-    {
-        while (strcmp(characters[i].name, pivot->name) <= 0 && i < high) 
-        {
-            i++;
-        }
-        while (strcmp(characters[j].name, pivot->name) > 0 && j > low) 
-        {
-            j--;
-        }
-        if (i < j) 
-        {
-            swap(i, j);
-        }
-    }
-    swap(low, j);
-}
-
 void sortCharacterbyName(int low, int high) {
     //quick sort
     if (low < high) {
-        int pi = partition(low, high);
-        
-        sortCharacterbyName(low, pi - 1);
-        sortCharacterbyName(pi + 1, high);
+        data pivot = characters[low];
+        int i = low;
+        int j = high;
+
+        while (i < j)
+        {
+            while (strcmp(characters[i].name, pivot.name) <= 0 && i < high)
+            {
+                // printf("Comparing %s with pivot %s\n", characters[i].name, pivot.name);
+                // printf("i: %d, j: %d\n", i, j);
+                
+                i++;
+            }
+            while (strcmp(characters[j].name, pivot.name) > 0 && j > low)
+            {
+                // printf("Comparing %s with pivot %s\n", characters[j].name, pivot.name);
+                // printf("j: %d, i: %d\n", j, i);
+                
+                j--;
+            }
+            if (i < j)
+            {
+                // printf("Swapping %s and %s\n", characters[i].name, characters[j].name);
+
+                data temp = characters[i];
+                characters[i] = characters[j];
+                characters[j] = temp;
+                
+                
+            }
+        }
+        // printf("Swapping pivot %s with %s\n", pivot.name, characters[j].name);
+
+        characters[low] = characters[j];
+        characters[j] = pivot;
+
+        sortCharacterbyName(low, j - 1);
+        sortCharacterbyName(j + 1, high);
     }
 }
 
 void updateCharacterStatus(char name[], char newStatus[]) {
-
+    data *character = searchCharacter(name);
+    if (character != NULL) {
+        strcpy(character->status, newStatus);
+    } else {
+        printf("Character not found.\n");
+    }
 }
 
 void displayCharacters() {
@@ -123,6 +133,18 @@ void displayCharacters() {
 
 int main(int argc, char const *argv[])
 {
+    
+    // addCharacter("j", 1, 100, 50, 20, 10, 0.0, "Alive");
+    // addCharacter("d", 2, 120, 60, 25, 15, 0.0, "Alive");
+    // addCharacter("e", 1, 80, 30, 15, 5, 0.0, "Alive");
+    // addCharacter("b", 3, 90, 70, 30, 20, 0.0, "Alive");
+    // addCharacter("i", 2, 110, 40, 22, 12, 0.0, "Alive");
+    // addCharacter("a", 4, 130, 80, 35, 25, 0.0, "Alive");
+    // addCharacter("h", 2, 95, 55, 18, 8, 0.0, "Alive");
+    // addCharacter("g", 1, 85, 45, 17, 7, 0.0, "Alive");
+    // addCharacter("k", 3, 105, 65, 28, 18, 0.0, "Alive");
+    // addCharacter("f", 2, 115, 75, 20, 10, 0.0, "Alive");
+    // addCharacter("c", 5, 140, 90, 40, 30, 0.0, "Alive");
     addCharacter("Hero", 1, 100, 50, 20, 10, 0.0, "Alive");
     addCharacter("Villain", 2, 120, 60, 25, 15, 0.0, "Alive");
     addCharacter("Sidekick", 1, 80, 30, 15, 5, 0.0, "Alive");
@@ -141,6 +163,10 @@ int main(int argc, char const *argv[])
     addCharacter("Berserker", 4, 150, 100, 45, 35, 0.0, "Alive");
     addCharacter("Ranger", 2, 105, 60, 20, 10, 0.0, "Alive");
     addCharacter("Warlock", 3, 120, 75, 35, 25, 0.0, "Alive");
+    
+    data *pivot = &characters[0 + ((characterCount - 1) - 0) / 2];
+    int hasil = strcmp(characters[0].name, pivot->name);
+    printf("Comparison result: %d\n", hasil);
     displayCharacters();
     printf("\n");
     printf("\n");
