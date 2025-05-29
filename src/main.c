@@ -73,24 +73,22 @@ int partition(int low, int high) {
     int i = low;
     int j = high;
 
-    while (i < j)
+    while (i < j) 
     {
-
-        while (strcmp(characters[i].name, pivot->name) <= 0 && i < high)
+        while (strcmp(characters[i].name, pivot->name) <= 0 && i < high) 
         {
             i++;
         }
-        while (strcmp(characters[i].name, pivot->name) > 0 && j > low)
+        while (strcmp(characters[j].name, pivot->name) > 0 && j > low) 
         {
             j--;
         }
-        if (i < j)
+        if (i < j) 
         {
             swap(i, j);
         }
     }
     swap(low, j);
-    return j; // Return the partition index
 }
 
 void sortCharacterbyName(int low, int high) {
