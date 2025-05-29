@@ -1,0 +1,30 @@
+{
+    "C_Cpp.default.compilerPath": "C:\\msys64\\ucrt64\\bin\\gcc.exe",
+    "editor.fontSize": 15,
+    "window.zoomLevel": 0.2,
+    "terminal.integrated.fontSize": 16,
+    "files.associations": {
+        "iostream": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp",
+        "xlocale": "cpp",
+        "format": "cpp",
+        "memory": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "xlocmes": "cpp",
+        "xlocmon": "cpp",
+        "xlocnum": "cpp",
+        "xloctime": "cpp",
+        "xutility": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "enabled",
+    "workbench.colorTheme": "2077",
+    "workbench.iconTheme": "vscode-icons",
+    "editor.defaultFormatter": "ms-vscode.cpptools",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.formatOnPaste": true
+
+}
