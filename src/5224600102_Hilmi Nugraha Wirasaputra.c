@@ -271,6 +271,7 @@ int main(int argc, char const *argv[])
             char deleteName[50];
             printf("Enter character name: ");
             scanf(" %49[^\n]", deleteName);
+            sortCharacterbyName(0, characterCount - 1);
             deleteCharacter(deleteName);
             break;
 
