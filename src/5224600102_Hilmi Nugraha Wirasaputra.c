@@ -46,7 +46,7 @@ data *searchCharacter(char name[])
     while (low <= high) 
     {
         mid = low + (high - low) / 2;
-        int cmp = strcmp(characters[mid].name, name);
+        int cmp = strcmpi(characters[mid].name, name);
         if (cmp == 0)
         {
             return &characters[mid];
@@ -65,13 +65,18 @@ data *searchCharacter(char name[])
 
 void deleteCharacter(char name[]) 
 {
+    if (characterCount == 0) 
+    {
+        printf("No characters to delete.\n");
+        return;
+    }
     int low = 0;
     int high = characterCount - 1;
     int mid;
     while (low <= high)
     {
         mid = low + (high - low) / 2;
-        int cmp = strcmp(characters[mid].name, name);
+        int cmp = strcmpi(characters[mid].name, name);
         if (cmp == 0)
         {
             for (int i = mid; i < characterCount - 1; i++) 
@@ -97,7 +102,6 @@ void deleteCharacter(char name[])
 
 void sortCharacterbyName(int low, int high) 
 {
-    //quick sort
     if (low < high) 
     {
         data pivot = characters[low];
@@ -106,33 +110,22 @@ void sortCharacterbyName(int low, int high)
 
         while (i < j)
         {
-            while (strcmp(characters[i].name, pivot.name) <= 0 && i < high)
+            while (strcmpi(characters[i].name, pivot.name) <= 0 && i < high)
             {
-                // printf("Comparing %s with pivot %s\n", characters[i].name, pivot.name);
-                // printf("i: %d, j: %d\n", i, j);
-                
                 i++;
             }
-            while (strcmp(characters[j].name, pivot.name) > 0 && j > low)
+            while (strcmpi(characters[j].name, pivot.name) > 0 && j > low)
             {
-                // printf("Comparing %s with pivot %s\n", characters[j].name, pivot.name);
-                // printf("j: %d, i: %d\n", j, i);
-                
+
                 j--;
             }
             if (i < j)
             {
-                // printf("Swapping %s and %s\n", characters[i].name, characters[j].name);
-
                 data temp = characters[i];
                 characters[i] = characters[j];
                 characters[j] = temp;
-                
-                
             }
         }
-        // printf("Swapping pivot %s with %s\n", pivot.name, characters[j].name);
-
         characters[low] = characters[j];
         characters[j] = pivot;
 
@@ -180,6 +173,7 @@ void displayCharacters()
 int main(int argc, char const *argv[])
 {
     addCharacter("Hero", 1, 100, 50, 20, 10, 0.0, "Alive");
+    addCharacter("hero", 1, 100, 50, 20, 10, 0.0, "Alive");
     addCharacter("Villain", 2, 120, 60, 25, 15, 0.0, "Alive");
     addCharacter("Sidekick", 1, 80, 40, 15, 5, 0.0, "Alive");
     addCharacter("Mage", 3, 90, 70, 30, 20, 0.0, "Alive");
@@ -270,8 +264,8 @@ int main(int argc, char const *argv[])
         case 4:
             char deleteName[50];
             printf("Enter character name: ");
-            scanf(" %49[^\n]", deleteName);
             sortCharacterbyName(0, characterCount - 1);
+            scanf(" %49[^\n]", deleteName);
             deleteCharacter(deleteName);
             break;
 
